@@ -91,7 +91,7 @@ for line in lines[1:]:
     lc200_samp.append(np.random.normal(0., 1., nint))
     laimf_samp.append(np.random.normal(0., 1., nint))
 
-    grid_file = h5py.File(workdir+'/sl_chains/%s_nfw_tein_crosssect_tailored_grid.hdf5'%name, 'r')
+    grid_file = h5py.File('sl_chains/%s_nfw_tein_crosssect_tailored_grid.hdf5'%name, 'r')
 
     lmstar_grid = grid_file['lmstar_grid'].value.copy()
     nmstar = len(lmstar_grid)
@@ -265,7 +265,7 @@ sampler = emcee.EnsembleSampler(nwalkers, npars, logpfunc, threads=50)
 start = []
 if len(sys.argv) > 1:
     print 'using last step of %s to initialize walkers'%sys.argv[1]
-    startfile = h5py.File(workdir+'/%s'%sys.argv[1], 'r')
+    startfile = h5py.File('%s'%sys.argv[1], 'r')
 
     for i in range(nwalkers):
         tmp = np.zeros(npars)

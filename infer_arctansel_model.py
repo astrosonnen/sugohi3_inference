@@ -266,7 +266,7 @@ sampler = emcee.EnsembleSampler(nwalkers, npars, logpfunc, threads=50)
 start = []
 if len(sys.argv) > 1:
     print 'using last step of %s to initialize walkers'%sys.argv[1]
-    startfile = h5py.File(workdir+'/%s'%sys.argv[1], 'r')
+    startfile = h5py.File('%s'%sys.argv[1], 'r')
 
     for i in range(nwalkers):
         tmp = np.zeros(npars)
@@ -291,7 +291,7 @@ sampler.run_mcmc(start, nstep)
 
 blobchain = sampler.blobs
 
-output_file = h5py.File(workdir+'/arctansel_inference.hdf5', 'w')
+output_file = h5py.File('arctansel_inference.hdf5', 'w')
 output_file.create_dataset('logp', data = sampler.lnprobability)
 for n in range(npars):
     output_file.create_dataset(pars[n]['name'], data = sampler.chain[:, :, n])
